@@ -1,11 +1,14 @@
 import pygame
 import classes, functions
+import os
 
 pygame.init() #starts program
 
-win = pygame.display.set_mode((500, 500)) # sets window size.
+win = pygame.display.set_mode((480, 270)) # sets window size.
 pygame.display.set_caption("Heyo") # sets window caption
 
+# Images
+bg = pygame.image.load(os.path.join('graphics', 'bg.png'))
 
 x = 50
 y = 50
@@ -13,11 +16,12 @@ w = 50
 h = 50
 c = (255, 0, 0)
 #Creating player objects.
-player1 = classes.Player(x, y, w, h, c, 1)
+player1 = classes.Player(x+80, y+150, w, h, c, 1)
 player1.draw(win)
-
-player2 = classes.Player(x+150, y, w, h, (0, 255, 0), 2)
+player1.dir = 'rs'
+player2 = classes.Player(x+300, y+150, w, h, (0, 255, 0), 2)
 player2.draw(win)
+player2.dir = 'ls'
 
 run = True
 while run:
@@ -27,12 +31,11 @@ while run:
             run = False
     keys = pygame.key.get_pressed()
 
-    player1.move(keys, 10) # Diff move.
-    player2.move(keys, 10)
-
+    player1.move(keys, 3) # Diff move.
+    player2.move(keys, 3)
 
     #!! Window update !!
-    win.fill((0,0,0)) # Reset background -
+    win.blit(bg, (0,0)) # Reset background -
     player1.draw(win) # Printing players.
     player2.draw(win)
 
