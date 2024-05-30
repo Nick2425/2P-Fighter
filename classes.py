@@ -2,18 +2,24 @@ import pygame
 import os
 import constants
 
-cga_r = [pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-2-column-' + str(i)) + '.png') for i in range(1,5)]
-cga_l = [pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-4-column-' + str(i)) + '.png') for i in range(1,5)]
+cga_r = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-2-column-' + str(i)) + '.png'), 1.5) for i in range(1,5)]
+cga_l = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-4-column-' + str(i)) + '.png'), 1.5) for i in range(1,5)]
 # Still Images
-cgs_r = pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-2-column-1.png'))
-cgs_l = pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-4-column-1.png'))
+cgs_r = pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-2-column-1.png')), 1.5)
+cgs_l = pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cg/cg-splice', 'row-4-column-1.png')), 1.5)
 # Green Character Left / Right Movement Images for animation
-cba_r = [pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-2-column-' + str(i)) + '.png') for i in range(1,5)]
-cba_l = [pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-4-column-' + str(i)) + '.png') for i in range(1,5)]
+cba_r = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-2-column-' + str(i)) + '.png'), 1.5) for i in range(1,5)]
+cba_l = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-4-column-' + str(i)) + '.png'), 1.5) for i in range(1,5)]
 # Still Images
-cbs_r = pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-2-column-1.png'))
-cbs_l = pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-4-column-1.png')) 
+cbs_r = pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-2-column-1.png')), 1.5)
+cbs_l = pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cb/cb-splice', 'row-4-column-1.png')), 1.5)
 # Player class is to create moveable player objects.
+# Attack animations
+cgat_l = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cg/cg-attack-splice', 'row-4-column-' + str(i) + '.png')), 1.5) for i in range(1,5)]
+cgat_r = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cg/cg-attack-splice', 'row-3-column-' + str(i) + '.png')), 1.5) for i in range(1,5)]
+
+cbat_l = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cb/cb-attack-splice', 'row-4-column-' + str(i) + '.png')), 1.5) for i in range(1,5)]
+cbat_r = [pygame.transform.smoothscale_by(pygame.image.load(os.path.join('graphics/cb/cb-attack-splice', 'row-3-column-' + str(i) + '.png')), 1.5) for i in range(1,5)]
 
 class Player():
   def __init__(self, x, y, h, w, c, t):
@@ -47,6 +53,22 @@ class Player():
         win.blit(cbs_r, (self.x, self.y))
       elif direction == 'ls':
         win.blit(cbs_l, (self.x, self.y))
+
+    # Attack
+    if type == 3:
+      if direction == 'r' or 'rs':
+        pass
+      elif direction == 'l' or 'ls':
+        pass
+    elif type == 4:
+      if direction == 'r' or 'rs':
+        pass
+      elif direction == 'l' or 'ls':
+        pass
+
+
+
+
   def draw(self, win):
     #obj = (self.x, self.y, self.w, self.h)
     #c = self.color

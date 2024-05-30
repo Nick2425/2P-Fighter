@@ -10,6 +10,10 @@ pygame.display.set_caption("Heyo") # sets window caption
 # Images
 bg = pygame.image.load(os.path.join('graphics', 'bg.png'))
 
+
+clock = pygame.time.Clock()
+
+
 x = 50
 y = 50
 w = 50
@@ -25,12 +29,12 @@ player2.dir = 'ls'
 
 run = True
 while run:
-    pygame.time.delay(25) # delays code by 0.05s
+    clock.tick() # 40 ticks per second
+    pygame.time.delay(25) # delays code by 0.025s
     for event in pygame.event.get(): # gets list of events
         if event.type == pygame.QUIT: # event type is 'quit'
             run = False
     keys = pygame.key.get_pressed()
-
     player1.move(keys, 3) # Diff move.
     player2.move(keys, 3)
 
