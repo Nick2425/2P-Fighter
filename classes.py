@@ -1,6 +1,6 @@
 import pygame
 import os
-import constants
+import constants, functions
 import math
 
 cga_r = [
@@ -76,12 +76,6 @@ cbat_r = [
 
 animation_const = 0
 
-
-def dist(obj1, obj2):
-  dist = math.sqrt((obj1.x - obj2.x)**2 + (obj1.y - obj2.y)**2)
-  return dist
-
-
 class Player():
 
   def __init__(self, x, y, h, w, c, t):
@@ -94,6 +88,7 @@ class Player():
     self.mt = t  #movement type: differing keyboard inputs.
     self.ac = 0
     self.attack = False
+    self.life = constants.MAX_LIFE
 
   def anim(self, win, type, direction, obj1, obj2):
     x = animation_const % 4
@@ -128,8 +123,9 @@ class Player():
         win.blit(cgat_l[self.ac], (self.x, self.y))
       elif self.dir == 'l':
         win.blit(cgat_l[self.ac], (self.x, self.y))
-      if dist(obj1, obj2) < 50:
-        print("p1 wins")
+      if functions.dist(obj1, obj2) < 30:
+        functions.dam(win, obj1, obj2)
+        functions.reset(obj1,obj2)
     elif type == 4:
       if self.dir == "rs":
         win.blit(cbat_r[self.ac], (self.x, self.y))
@@ -139,8 +135,9 @@ class Player():
         win.blit(cbat_l[self.ac], (self.x, self.y))
       elif self.dir == 'l':
         win.blit(cbat_l[self.ac], (self.x, self.y))
-      if dist(obj1, obj2) < 50:
-        print("p2 wins")
+      if functions.dist(obj1, obj2) < 30:
+        functions.dam(win, obj2, obj1)
+        functions.reset(obj1,obj2)
 
   def draw(self, win, obj1, obj2):
     #obj = (self.x, self.y, self.w, self.h)

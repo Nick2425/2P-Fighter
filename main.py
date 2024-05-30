@@ -1,5 +1,5 @@
 import pygame
-import classes, functions
+import classes, functions, constants
 import os
 
 pygame.init()  #starts program
@@ -12,27 +12,28 @@ bg = pygame.image.load(os.path.join('graphics', 'bg.png'))
 
 clock = pygame.time.Clock()
 
-x = 50
-y = 50
-w = 50
-h = 50
-c = (255, 0, 0)
+c = 0
+h = 0
+w = 0
+
 #Creating player objects.
-player1 = classes.Player(x + 80, y + 150, w, h, c, 1)
-player2 = classes.Player(x + 300, y + 150, w, h, (0, 255, 0), 2)
+player1 = classes.Player(80, 100, w, h, c, 1)
+player2 = classes.Player(400, 170, w, h, (0, 255, 0), 2)
 
 player1.draw(win, player1, player2)
 player1.dir = 'rs'
 player2.draw(win, player1, player2)
 player2.dir = 'ls'
 
+functions.reset(player1, player2)
+
 # Custom Event to make a coroutine.
 C_E = pygame.event.custom_type()
 
-run = True
+constants.run = True
 pygame.time.set_timer(C_E, 250)
 
-while run:
+while constants.run:
     clock.tick()  # 40 ticks per second
     pygame.time.delay(25)  # delays code by 0.025s
 
@@ -44,6 +45,8 @@ while run:
     win.blit(bg, (0, 0))  # Reset background -
     player1.draw(win, player1, player2)  # Printing players.
     player2.draw(win, player1, player2)
+    
+    functions.updateUI(win, player1, player2)
 
     pygame.display.update()
     for event in pygame.event.get():  # gets list of events
@@ -65,4 +68,6 @@ while run:
 
             if player2.attack:
                 player2.ac += 1
+
+pygame.time.delay(2500)
 pygame.quit()
