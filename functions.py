@@ -2,7 +2,10 @@ import pygame
 import os, math, constants
 
 pygame.font.init()
+pygame.mixer.init()
 # Blue Character Left / Right Movement Images for animation
+bonk = pygame.mixer.Sound('graphics/sound/bonk.mp3')
+winm = pygame.mixer.Sound('graphics/sound/winbrass.wav')
 
 def reset(obj1, obj2):
     obj1.x = 80
@@ -21,8 +24,7 @@ def hold(type, t: float):
 
 def dam(surf, attacker, victim):
    victim.life -= 1
-   pygame.mixer.music.load('graphics/sound/bonk.mp3')
-   pygame.mixer.music.play(1)
+   bonk.play()
    if victim.life <= 0:
       win(surf, attacker)
 wintext = pygame.font.SysFont('Comic Sans MS', 30)
@@ -35,10 +37,12 @@ def win(surf, obj):
       surf.blit(x, (100, 100))
    
    constants.run = False
-   pygame.mixer.music.load('graphics/sound/winbrass.wav')
-   pygame.mixer.music.play(1)
+   winm.play()
             
-   
+def playmusic():
+   pygame.mixer.music.load('graphics/sound/fight.wav')
+   pygame.mixer.music.play(100)
+   pygame.mixer.music.set_volume(0.25)
 
 def updateUI(surf, obj1, obj2):
    surf.blit(pygame.image.load(os.path.join('graphics', 'player1.png')), (0, 0))

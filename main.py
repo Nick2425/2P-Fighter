@@ -32,7 +32,7 @@ C_E = pygame.event.custom_type()
 
 constants.run = True
 pygame.time.set_timer(C_E, 250)
-
+functions.playmusic()
 while constants.run:
     clock.tick()  # 40 ticks per second
     pygame.time.delay(25)  # delays code by 0.025s
